@@ -1,6 +1,6 @@
 export class Utils {
-    public static toUpperCase(arg: string) {
-        return '';
+    public static toUpperCase(arg: string): string {
+        return arg.toLocaleUpperCase();
     }
 }
 
