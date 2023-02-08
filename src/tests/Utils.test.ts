@@ -38,6 +38,16 @@ describe('Utils test suite', () => {
         expect(() => Utils.parseUrl('')).toThrow(/url cannot be blank or an empty string/i);
     });
 
+    it.only('test invalid URL with try-catch', () => {
+        try {
+            Utils.parseUrl('');
+        } catch (error) {
+            // check that the error is indeed of type Error
+            expect(error).toBeInstanceOf(Error);
+            expect(error).toHaveProperty('message', "url cannot be blank or an empty string");
+        }
+    });
+
     // fom this article: https://techblog.topdesk.com/coding/frontend-testing-with-jest-assertions-deep-dive/#:~:text=toBe%20compares%20the%20referential%20identity,object%20is%20the%20same%20instance.
     test('To be, to equal and to strict equal', () => {
         // toBe test referential identity - it must point to the exact same reference
