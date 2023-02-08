@@ -38,7 +38,7 @@ describe('Utils test suite', () => {
         expect(() => Utils.parseUrl('')).toThrow(/url cannot be blank or an empty string/i);
     });
 
-    it.only('test invalid URL with try-catch', () => {
+    it('test invalid URL with try-catch', () => {
         try {
             Utils.parseUrl('');
         } catch (error) {
