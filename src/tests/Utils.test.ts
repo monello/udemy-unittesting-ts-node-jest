@@ -1,23 +1,6 @@
 import { Utils } from "../app/Utils";
 
 describe('Utils test suite', () => {
-
-    beforeAll(() => {
-        console.log('before all');
-    });
-
-    beforeEach(() => {
-        console.log('before each');
-    });
-
-    afterEach(() => {
-        console.log('after each');
-    });
-
-    afterAll(() => {
-        console.log('after all');
-    });
-
     it('first test', () => {
         const result = Utils.toUpperCase('abc');
         expect(result).toBe('ABC');
