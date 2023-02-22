@@ -11,5 +11,10 @@ export class Utils {
     public static toUpperCase(arg: string): string {
         return arg.toLocaleUpperCase();
     }
+
+    /* istanbul ignore next */
+    public static someComplicatedUntestablePointlessToTestFunction() {
+        return "foobar";
+    }
 }
 
