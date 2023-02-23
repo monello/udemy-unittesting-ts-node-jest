@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from '@jest/types';
+
+const config: Config.InitialOptions = {
     roots: ['<rootDir>/src'],
     transform: {
         '^.+\\.tsx?$': 'ts-jest'
@@ -9,3 +11,5 @@ module.exports = {
     collectCoverage: true,  // Here we turn on coverage
     collectCoverageFrom: ['<rootDir>/src/app/**/*.ts'] // Here we tell jest to look for all files that that end with '.ts' inside the 'src/app' folder and all it's sub-folders
 };
+
+export default config;
