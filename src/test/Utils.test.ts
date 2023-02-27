@@ -3,9 +3,23 @@ import { getStringInfo, stringInfo, StringUtils, toUpperCase } from "../app/Util
 describe('Utils test suite', () => {
 
     describe.only('StringUtils class', () => {
+
+        let sut: StringUtils;
+
+        // SETUP
+        beforeEach(() => {
+            sut = new StringUtils;
+            console.log("Hello fro beforeEach()");
+        });
+
+        // TEARDOWN
+        afterEach(() => {
+            // usually the aferEach would be used to do clean-up. like database clean up etc.
+            console.log("Hello fro afterEach()");
+        });
+
         it('should return a proper upper cased value', () => {
             // ARRANGE
-            const sut = new StringUtils;
             const expected = 'ABC';
 
             // ACT
@@ -13,6 +27,21 @@ describe('Utils test suite', () => {
 
             // ASSERT
             expect(actual).toBe(expected);
+
+            console.log("Hello fro test ABC");
+        });
+
+        it('should also return a proper upper cased value', () => {
+            // ARRANGE
+            const expected = 'XYZ';
+
+            // ACT
+            const actual = sut.toUpperCase('xyz');
+
+            // ASSERT
+            expect(actual).toBe(expected);
+
+            console.log("Hello fro test XYZ");
         });
     });
 
