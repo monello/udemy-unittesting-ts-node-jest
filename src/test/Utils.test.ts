@@ -6,16 +6,24 @@ describe('Utils test suite', () => {
 
         let sut: StringUtils;
 
+        beforeAll(() => {
+            console.log(">>>>>>>>>>>> hello from beforeAll <<<<<<<<<<<<");
+        });
+
+        afterAll(() => {
+            console.log(">>>>>>>>>>>> hello from afterAll <<<<<<<<<<<<");
+        });
+
         // SETUP
         beforeEach(() => {
             sut = new StringUtils;
-            console.log("Hello fro beforeEach()");
+            console.log("Hello from beforeEach()");
         });
 
         // TEARDOWN
         afterEach(() => {
             // usually the aferEach would be used to do clean-up. like database clean up etc.
-            console.log("Hello fro afterEach()");
+            console.log("Hello from afterEach()");
         });
 
         it('should return a proper upper cased value', () => {
@@ -28,7 +36,7 @@ describe('Utils test suite', () => {
             // ASSERT
             expect(actual).toBe(expected);
 
-            console.log("Hello fro test ABC");
+            console.log("Hello from test ABC");
         });
 
         it('should also return a proper upper cased value', () => {
@@ -41,7 +49,7 @@ describe('Utils test suite', () => {
             // ASSERT
             expect(actual).toBe(expected);
 
-            console.log("Hello fro test XYZ");
+            console.log("Hello from test XYZ");
         });
     });
 
