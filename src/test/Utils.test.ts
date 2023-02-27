@@ -1,6 +1,22 @@
-import { getStringInfo, stringInfo, toUpperCase } from "../app/Utils";
+import { getStringInfo, stringInfo, StringUtils, toUpperCase } from "../app/Utils";
 
 describe('Utils test suite', () => {
+
+    describe.only('StringUtils class', () => {
+        it('should return a proper upper cased value', () => {
+            // ARRANGE
+            const sut = new StringUtils;
+            const expected = 'ABC';
+
+            // ACT
+            const actual = sut.toUpperCase('abc');
+
+            // ASSERT
+            expect(actual).toBe(expected);
+        });
+    });
+
+
     it('should return uppercase of a valid string', () => {
         // ARRANGE
         // - sut: system under test - referencing to the toUppercase() function that we ate testing
