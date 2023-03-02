@@ -82,4 +82,29 @@ describe('PasswordChecker test suite', () => {
             expect(actual.reasons).not.toContain(PasswordErrors.NO_LOWER_CASE);
         });
     });
+
+    describe('admin password checks', () => {
+        it('admin password without a number is invalid', () => {
+            // ARRANGE
+            const password = 'abc';
+
+            // ACT
+            const actual = sut.checkAdminPassword(password);
+
+            // ASSERT
+            expect(actual.valid).toBeFalsy();
+            expect(actual.reasons).toContain(PasswordErrors.NO_NUMBER);
+        });
+
+        it('admin password with a number is okay', () => {
+            // ARRANGE
+            const password = 'abc1';
+
+            // ACT
+            const actual = sut.checkAdminPassword(password);
+
+            // ASSERT
+            expect(actual.reasons).not.toContain(PasswordErrors.NO_NUMBER);
+        });
+    });
 });
