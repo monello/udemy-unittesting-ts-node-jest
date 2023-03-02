@@ -1,4 +1,4 @@
-import { PasswordChecker } from "../../app/pass_checker/PasswordChecker";
+import { PasswordChecker, PasswordErrors } from "../../app/pass_checker/PasswordChecker";
 
 describe('PasswordChecker test suite', () => {
 
@@ -11,72 +11,75 @@ describe('PasswordChecker test suite', () => {
     describe('password length checks', () => {
         it('password with < 8 characters is invalid', () => {
             // ARRANGE
-            const password = '123456a';
+            const password = '1234567';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeFalsy();
+            expect(actual.valid).toBeFalsy();
+            expect(actual.reasons).toContain(PasswordErrors.SHORT);
         });
 
         it('password with >= 8 characters is okay', () => {
             // ARRANGE
-            const password = '123456Ab';
+            const password = '12345678';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeTruthy();
+            expect(actual.reasons).not.toContain(PasswordErrors.SHORT);
         });
     });
 
     describe('uppercase letter checks', () => {
         it('password with no uppercase letters is invalid', () => {
             // ARRANGE
-            const password = '1234abcd';
+            const password = 'abc';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeFalsy();
+            expect(actual.valid).toBeFalsy();
+            expect(actual.reasons).toContain(PasswordErrors.NO_UPPER_CASE);
         });
 
         it('password with at least 1 uppercase letter is okay', () => {
             // ARRANGE
-            const password = '1234abcX';
+            const password = 'abcX';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeTruthy();
+            expect(actual.reasons).not.toContain(PasswordErrors.NO_UPPER_CASE);
         });
     });
 
     describe('lowercase letter checks', () => {
         it('password with no lowercase letters is invalid', () => {
             // ARRANGE
-            const password = '1234ABCD';
+            const password = 'ABC';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeFalsy();
+            expect(actual.valid).toBeFalsy();
+            expect(actual.reasons).toContain(PasswordErrors.NO_LOWER_CASE);
         });
 
         it('password with at least 1 lowercase letter is okay', () => {
             // ARRANGE
-            const password = '1234ABCd';
+            const password = 'ABCd';
 
             // ACT
             const actual = sut.checkPassword(password);
 
             // ASSERT
-            expect(actual).toBeTruthy();
+            expect(actual.reasons).not.toContain(PasswordErrors.NO_LOWER_CASE);
         });
     });
 });
