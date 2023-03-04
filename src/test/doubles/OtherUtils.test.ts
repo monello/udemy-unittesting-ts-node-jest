@@ -1,7 +1,7 @@
-import { calculateComplexity } from "../../app/doubles/OtherUtils";
+import { calculateComplexity, toUpperCaseWithCallback } from "../../app/doubles/OtherUtils";
 
 describe('OtherUtils test suite', () => {
-    it('calculates complexity', () => {
+    it('calculateComplexity() - calculates complexity', () => {
         // ARRANGE
         const sut = calculateComplexity;
 
@@ -36,6 +36,31 @@ describe('OtherUtils test suite', () => {
         const actual = sut(stub as any);
 
         //ASERT
+        expect(actual).toBe(expected);
+    });
+
+    it('toUpperCaseWithCallback() - Invalid argument', () => {
+        // ARRANGE
+        const sut = toUpperCaseWithCallback;
+
+        // ACT
+        // we send in a blank string and a Fake callback function as the 2nd param
+        const actual = sut('', () => { });
+
+        // ASSERT
+        expect(actual).toBeUndefined();
+    });
+
+    it('toUpperCaseWithCallback() - Valid argument', () => {
+        // ARRANGE
+        const sut = toUpperCaseWithCallback;
+        const expected = 'ABC';
+
+        // ACT
+        // we send in a blank string and a Fake callback function as the 2nd param
+        const actual = toUpperCaseWithCallback('abc', () => { });
+
+        // ASSERT
         expect(actual).toBe(expected);
     });
 });
