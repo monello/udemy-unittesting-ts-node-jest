@@ -20,3 +20,24 @@ export function toUpperCaseWithCallback(arg: string, callback: ToUpperCaseCallba
     callback(`called with ${arg}`);
     return arg.toUpperCase();
 }
+
+export class OtherStringUtils {
+
+    private cannotSpyOnme() {
+        console.log('you cannot spy on private methods - whithout hacks :)');
+    }
+
+    public callExternalService() {
+        console.log("Some fancy functionality that interacts with an external service");
+    }
+
+    public toUppercase(arg: string) {
+        return arg.toUpperCase();
+    }
+
+    public logString(arg: string) {
+        console.log(arg);
+
+    }
+
+}

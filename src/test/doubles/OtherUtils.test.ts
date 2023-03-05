@@ -1,4 +1,4 @@
-import { calculateComplexity, toUpperCaseWithCallback } from "../../app/doubles/OtherUtils";
+import { calculateComplexity, OtherStringUtils, toUpperCaseWithCallback } from "../../app/doubles/OtherUtils";
 
 describe('OtherUtils test suite', () => {
 
@@ -41,7 +41,6 @@ describe('OtherUtils test suite', () => {
             expect(actual).toBe(expected);
         });
     });
-
 
     describe('Examples using Fakes', () => {
         it('toUpperCaseWithCallback() - Invalid argument', () => {
@@ -165,6 +164,55 @@ describe('OtherUtils test suite', () => {
                 expect(callbackMock).toBeCalledWith(expectedArgument);
                 expect(callbackMock).toBeCalledTimes(expectedTimesCalled);
             });
+        });
+    });
+
+    describe('OtherStringUtils tests eith spies', () => {
+
+        let sut: OtherStringUtils;
+
+        beforeEach(() => {
+            sut = new OtherStringUtils();
+        });
+
+        test('Use a spy to track calls', () => {
+            // ARRANGE
+            const argument = 'abc';
+            const toUpperCaseSpy = jest.spyOn(sut, 'toUppercase');
+
+            // ACT
+            sut.toUppercase(argument);
+
+            // ASSERT
+            expect(toUpperCaseSpy).toBeCalledWith(argument);
+        });
+
+        test('Usa a spy to track calls to other modules', () => {
+            // ARRANGE
+            const argument = 'abc';
+            const consoleLogSpy = jest.spyOn(console, 'log');
+
+            // ACT
+            sut.logString(argument);
+
+            // ASSERT
+            expect(consoleLogSpy).toBeCalledWith(argument);
+        });
+
+        test('Use a spy with a mocked implementation', () => {
+            // ARRANGE
+            const mosckedImplementationSpy = jest.spyOn(sut, 'callExternalService').mockImplementation(() => {
+                console.log('calling with a mocked implementation!!!');
+
+            });
+
+            // ACT
+            sut.callExternalService();
+
+            // ASSERT
+            // for the demo purposes we were just interested to see the log output and confirm
+            // that the mocked console.log was called and not the one defined in the code
+            // so we don't have an assertion. In real life the test would be more realixtic and have an assertion for it
         });
     });
 });
