@@ -89,7 +89,7 @@ describe('OtherUtils test suite', () => {
                 timesCalled = 0;
             });
 
-            it('tracks (Manual) callback - with invalid arguments', () => {
+            it('tracks callback - with invalid arguments', () => {
                 // ARRANGE
                 const argument = '';
                 const expectedArgument = 'Invalid argument';
@@ -107,7 +107,7 @@ describe('OtherUtils test suite', () => {
                 expect(timesCalled).toBe(expectedTimesCalled);
             });
 
-            it('tracks (Manual) callback - with valid arguments', () => {
+            it('tracks callback - with valid arguments', () => {
                 // ARRANGE
                 const argument = 'abc';
                 const expectedResult = 'ABC';
@@ -124,6 +124,46 @@ describe('OtherUtils test suite', () => {
                 expect(callbackArguments).toContain(expectedArgument);
                 // here we can check if (how many times) the callback was invoked inside the toUpperCaseWithCallback() function
                 expect(timesCalled).toBe(expectedTimesCalled);
+            });
+        });
+
+        describe('using Jest Built-in Mocks', () => {
+            const callbackMock = jest.fn();
+
+            // reset the trackng variables between each test to ensure each test is independent
+            afterEach(() => {
+                jest.clearAllMocks();
+            });
+
+            it('tracks callback - with invalid arguments', () => {
+                // ARRANGE
+                const argument = '';
+                const expectedArgument = 'Invalid argument';
+                const expectedTimesCalled = 1;
+
+                // ACT
+                const actual = toUpperCaseWithCallback(argument, callbackMock);
+
+                // ASSERT
+                expect(actual).toBeUndefined();
+                expect(callbackMock).toBeCalledWith(expectedArgument);
+                expect(callbackMock).toBeCalledTimes(expectedTimesCalled);
+            });
+
+            it('tracks callback - with valid arguments', () => {
+                // ARRANGE
+                const argument = 'abc';
+                const expectedResult = 'ABC';
+                const expectedArgument = `called with ${argument}`;
+                const expectedTimesCalled = 1;
+
+                // ACT
+                const actual = toUpperCaseWithCallback(argument, callbackMock);
+
+                // ASSERT
+                expect(actual).toBe(expectedResult);
+                expect(callbackMock).toBeCalledWith(expectedArgument);
+                expect(callbackMock).toBeCalledTimes(expectedTimesCalled);
             });
         });
     });
