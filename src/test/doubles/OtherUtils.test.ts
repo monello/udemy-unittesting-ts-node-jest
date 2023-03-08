@@ -167,7 +167,7 @@ describe('OtherUtils test suite', () => {
         });
     });
 
-    describe('OtherStringUtils tests eith spies', () => {
+    describe('OtherStringUtils tests with spies', () => {
 
         let sut: OtherStringUtils;
 
