@@ -35,7 +35,7 @@ describe('Database test suite', () => {
         jest.spyOn(IdGenerator, 'generateRandomId').mockReturnValue(fakeId);
     });
 
-    it('should return id after test', async () => {
+    it('insert() - should return id after test', async () => {
         // ACT
         const actualId = await sut.insert({ id: '' } as any);
 
@@ -43,7 +43,7 @@ describe('Database test suite', () => {
         expect(actualId).toBe(fakeId);
     });
 
-    it('should get an element after insert', async () => {
+    it('insert() - should get an element after insert', async () => {
         // ACT
         const id = await sut.insert(someObj);
         const actual = await sut.getBy('id', id);
@@ -52,7 +52,7 @@ describe('Database test suite', () => {
         expect(actual).toBe(someObj);
     });
 
-    it('should find all elements with the same property', async () => {
+    it('findAllBy() - should find all elements with the same property', async () => {
         // ARRANGE
         const expected = [someObj, someObj2];
 
@@ -66,7 +66,7 @@ describe('Database test suite', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('should change the color on object', async () => {
+    it('getBy() - should change the color on object', async () => {
         // ARRANGE
         const id = await sut.insert(someObj);
         const expectColor = "red";
@@ -80,7 +80,7 @@ describe('Database test suite', () => {
         expect(actualColor).toBe(expectColor);
     });
 
-    it('should delete oject', async () => {
+    it('delete() - should delete oject', async () => {
         // ARRANGE
         const id = await sut.insert(someObj);
 
@@ -92,13 +92,16 @@ describe('Database test suite', () => {
         expect(actual).toBeUndefined();
     });
 
-    it('should get all elements', async () => {
+    it('getAllElements() - should get all elements', async () => {
+        // ARRANGE
         await sut.insert(someObj);
         await sut.insert(someObj2);
         const expected = [someObj, someObj2];
 
+        // ACT
         const actual = await sut.getAllElements();
 
+        // ASERT
         expect(actual).toEqual(expected);
     });
 });
