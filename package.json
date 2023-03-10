@@ -4,7 +4,8 @@
     "description": "IGNORE THE BRANCH `section2` while I was doing the course the lecture released a complete overhaul of the course and that branch was still on the old course.\r The branches for the updated course will start with `updatedcourse-`",
     "main": "index.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "start": "ts-node srcappserver_appLauncher.ts"
     },
     "repository": {
         "type": "git",
